@@ -27,7 +27,7 @@ const Home = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setEditingEvent(prev => prev ? { ...prev, [e.target.name]: e.target.value } : null);
+    setEditingEvent((prev: Event | null) => prev ? { ...prev, [e.target.name]: e.target.value } : null);
   };
 
   const handleSave = async () => {
@@ -35,7 +35,7 @@ const Home = () => {
 
     try {
       const updatedEvent = await updateEvent(editingEvent.id, editingEvent);
-      setEvents(prevEvents => prevEvents.map(event => (event.id === updatedEvent.id ? updatedEvent as Event : event)));
+      setEvents((prevEvents: Event[]) => prevEvents.map((event: Event) => (event.id === updatedEvent.id ? updatedEvent as Event : event)));
       setEditingEvent(null);
     } catch (error) {
       console.error("Error updating event:", error);
@@ -45,7 +45,7 @@ const Home = () => {
   const handleDelete = async (id: number) => {
     try {
       await deleteEvent(id);
-      setEvents(prevEvents => prevEvents.filter(event => event.id !== id));
+      setEvents((prevEvents: Event[]) => prevEvents.filter((event: Event) => event.id !== id));
     } catch (error) {
       console.error("Error deleting event:", error);
     }

@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import configData from '../config/config.js';
+import configData from '../config/connections.js';
 
 const env = process.env.NODE_ENV || 'development'; // Ensure a default environment
 const config = configData[env]; // Get environment-specific config
