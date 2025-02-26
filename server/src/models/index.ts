@@ -1,5 +1,5 @@
 import sequelize from '../models/database.js';
-import { UserFactory } from './User.ts';
+import { UserFactory } from './User';
 
 const User = UserFactory(sequelize);
 
