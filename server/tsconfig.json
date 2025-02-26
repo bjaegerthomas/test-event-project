@@ -8,7 +8,9 @@
     "noImplicitAny": false,
     "outDir": "dist",             
     "rootDir": "src",             
-    "noEmitOnError": true        
+    "noEmitOnError": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,       
   },
   "include": ["src"],
       
