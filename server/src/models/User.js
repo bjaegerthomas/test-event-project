@@ -2,7 +2,7 @@
 import { DataTypes } from 'sequelize';
 
 // Import the Sequelize instance from the database configuration
-import sequelize from '../config/database.js';
+import sequelize from '../models/database.js';
 
 // Define the User model using Sequelize ORM
 const User = sequelize.define('User', {
