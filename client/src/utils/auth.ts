@@ -2,7 +2,7 @@
 // JwtPayload: A type definition representing the structure of a JSON Web Token payload.
 // jwtDecode: A function used to decode a JSON Web Token (JWT) and extract its payload.
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
-import type { UserLogin } from '../interfaces/userLogin';
+import type { UserLogin } from '../interfaces/UserLogin';
 
 class AuthService {
   getProfile() {
