@@ -1,36 +1,56 @@
-// Import the DataTypes module from Sequelize to define model attributes
+// Import necessary modules from Sequelize and bcrypt
 import { DataTypes } from 'sequelize';
-
-// Import the Sequelize instance from the database configuration
 import sequelize from '../models/database.js';
+import bcrypt from 'bcrypt';
 
 // Define the User model using Sequelize ORM
 const User = sequelize.define('User', {
   id: {
-    type: DataTypes.UUID, // Use UUID as the unique identifier for each user
-    defaultValue: DataTypes.UUIDV4, // Automatically generate a UUID for new users
-    primaryKey: true, // Mark this field as the primary key
+    type: DataTypes.UUID, 
+    defaultValue: DataTypes.UUIDV4, 
+    primaryKey: true, 
   },
   name: {
-    type: DataTypes.STRING, // Store the user's full name as a string
-    allowNull: false, // Name field is required
+    type: DataTypes.STRING, 
+    allowNull: false, 
   },
   email: {
-    type: DataTypes.STRING, // Store the user's email as a string
-    allowNull: false, // Email is required
-    unique: true, // Ensure email is unique across users
-    validate: { isEmail: true }, // Validate that the input is in email format
+    type: DataTypes.STRING, 
+    allowNull: false, 
+    unique: true, 
+    validate: { isEmail: true }, 
   },
   username: {
-    type: DataTypes.STRING, // Store a unique username for the user
-    allowNull: false, // Username is required
-    unique: true, // Ensure username is unique across users
+    type: DataTypes.STRING, 
+    allowNull: false, 
+    unique: true, 
   },
   password: {
-    type: DataTypes.STRING, // Store the hashed password as a string
-    allowNull: false, // Password is required
+    type: DataTypes.STRING, 
+    allowNull: false, 
   },
-}, { timestamps: true }); // Automatically add createdAt and updatedAt fields
+}, { 
+  timestamps: true,
+  hooks: {
+    // Hash password before saving a new user
+    beforeCreate: async (user) => {
+      const saltRounds = 10;
+      user.password = await bcrypt.hash(user.password, saltRounds);
+    },
+    // Hash password before updating if it's changed
+    beforeUpdate: async (user) => {
+      if (user.changed('password')) {
+        const saltRounds = 10;
+        user.password = await bcrypt.hash(user.password, saltRounds);
+      }
+    }
+  }
+});
 
-// Export the User model for use in other parts of the application
+// Method to compare passwords for login
+User.prototype.validPassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+// Export the User model
 export default User;
