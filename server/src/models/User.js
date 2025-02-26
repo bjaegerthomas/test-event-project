@@ -1,10 +1,17 @@
 // Import necessary modules from Sequelize and bcrypt
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../models/database.js';
 import bcrypt from 'bcrypt';
 
 // Define the User model using Sequelize ORM
-const User = sequelize.define('User', {
+class User extends Model {
+  async validPassword(password) {
+    return await bcrypt.compare(password, this.password);
+  }
+}
+
+// Initialize the User model with fields
+User.init({
   id: {
     type: DataTypes.UUID, 
     defaultValue: DataTypes.UUIDV4, 
@@ -30,6 +37,8 @@ const User = sequelize.define('User', {
     allowNull: false, 
   },
 }, { 
+  sequelize,
+  modelName: 'User',
   timestamps: true,
   hooks: {
     // Hash password before saving a new user
@@ -46,11 +55,6 @@ const User = sequelize.define('User', {
     }
   }
 });
-
-// Method to compare passwords for login
-User.prototype.validPassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
-};
 
 // Export the User model
 export default User;
