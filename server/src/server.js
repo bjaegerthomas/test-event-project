@@ -29,10 +29,10 @@ connectDB();
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 
-// Root endpoint
+/* // Root endpoint
 app.get("/", (req, res) => {
   res.send("🎉 Welcome to the Event Planner API!");
-});
+}); */
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
