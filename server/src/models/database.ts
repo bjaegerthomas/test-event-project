@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import configData from "../config/connections.js";
+import configData from "../config/connections";
 
 const env = process.env.NODE_ENV || "development";
 const config = configData[env];

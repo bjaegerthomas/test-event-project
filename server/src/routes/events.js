@@ -1,5 +1,5 @@
 import express from "express";
-import Event from "../models/EventModel"; // correction to import
+import Event from "../models/EventModel.js"; // correction to import
 import { authenticateToken } from "../middleware/authMiddleware.js"; // Middleware
 
 const router = express.Router();

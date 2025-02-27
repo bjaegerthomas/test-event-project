@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",                   // Set the ECMAScript version for the output (use ES2020 for modern Node.js)
-    "module": "ESNext",                    // Use ES modules in output
+    "module": "CommonJS",                    // Use ES modules in output
     "moduleResolution": "Node",             // Resolve modules in a Node.js style
     "allowJs": true,            
     "esModuleInterop": true,               // Enable compatibility with CommonJS modules
