@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2020",                   // Set the ECMAScript version for the output (use ES2020 for modern Node.js)
+    "target": "ESNext",                   // Set the ECMAScript version for the output (use ES2020 for modern Node.js)
     "module": "ESNext",                    // Use ES modules in output
     "moduleResolution": "Node",            // Resolve modules in a Node.js style
     "esModuleInterop": true,               // Enable compatibility with CommonJS modules
@@ -16,7 +16,8 @@
     }
   },
   "include": [
-    "src/**/*.ts"                          // Include all TypeScript files in the `src` folder
+    "src/**/*",                          // Include all files in the `src` folder
+    "src/config/connections.d.ts"  // Ensure the declaration file is included
   ],
   "exclude": [
     "node_modules",                        // Exclude the `node_modules` folder
