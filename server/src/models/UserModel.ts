@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
+import { DataTypes, Model, Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 import sequelize from './database';
 
@@ -8,6 +8,8 @@ interface UserAttributes {
   username: string;
   email: string;
   password: string;
+  name: string;
+  // Optional fields
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -17,10 +19,12 @@ interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
 
 // User Model Class
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
+  
   public id!: string;
   public username!: string;
   public email!: string;
   public password!: string;
+  public name!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -54,8 +58,11 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
   },
-  {
+  
     tableName: 'Users',
     sequelize,
     hooks: {
