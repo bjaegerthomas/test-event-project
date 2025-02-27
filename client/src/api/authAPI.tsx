@@ -1,4 +1,4 @@
-import type { UserLogin } from '../interfaces/userLogin.tsx';
+import type { UserLogin } from '../interfaces/UserLogin.tsx';
 import AuthService from '../utils/auth.ts';
 
 const login = async (userInfo: UserLogin) => {

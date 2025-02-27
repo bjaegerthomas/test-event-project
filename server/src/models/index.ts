@@ -1,4 +1,6 @@
 import sequelize from '../models/database.js';
-import User from './User.js';
+import { UserFactory } from './User';
 
-export { sequelize, User };
+const User = UserFactory(sequelize);
+
+export { User };
