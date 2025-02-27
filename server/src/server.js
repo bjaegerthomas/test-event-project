@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import sequelize from "./src/models/database.js";
-import authRoutes from "./src/routes/auth.js";
-import eventRoutes from "./src/routes/events.js";
+import sequelize from "./models/database.js";
+import authRoutes from "./routes/auth.js";
+import eventRoutes from "./routes/events.js";
 
 dotenv.config();
 const app = express();
