@@ -4,3 +4,16 @@ declare module '../config/connections' {
     const sequelize: Sequelize;
     export default sequelize;
   }
+
+  declare const configData: {
+    [key: string]: {
+      database: string;
+      username: string;
+      password: string;
+      host: string;
+      dialect: dialect;
+    };
+  };
+  
+  export default configData;
+  

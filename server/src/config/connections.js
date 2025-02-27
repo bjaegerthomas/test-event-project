@@ -1,16 +1,18 @@
-import { Sequelize } from "sequelize";
+const configData = {
+  development: {
+    database: process.env.DB_NAME || "dev_db",
+    username: process.env.DB_USER || "dev_user",
+    password: process.env.DB_PASSWORD || "dev_pw",
+    host: process.env.DB_HOST || "localhost",
+    dialect: "postgres",
+  },
+  production: {
+    database: process.env.DB_NAME || "prod_db",
+    username: process.env.DB_USER || "prod_user",
+    password: process.env.DB_PASSWORD || "prod_pw",
+    host: process.env.DB_HOST || "production_host",
+    dialect: "postgres",
+  },
+};
 
-const sequelize = process.env.DB_URL
-  ? new Sequelize(process.env.DB_URL)
-  : new Sequelize(
-      process.env.DB_NAME || "default_db_name",
-      process.env.DB_USER || "default_db_user",
-      process.env.DB_PASSWORD || "default_db_pw",
-      {
-        host: process.env.DB_HOST || "localhost",
-        dialect: "postgres",
-      }
-    );
-
-//  ES module export
-export default sequelize;
+export default configData;
