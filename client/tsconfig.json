@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "target": "ES2020",                   // Set the ECMAScript version for the output (use ES2020 for modern Node.js)
+    "module": "ESNext",                    // Use ES modules in output
+    "moduleResolution": "Node",            // Resolve modules in a Node.js style
+    "esModuleInterop": true,               // Enable compatibility with CommonJS modules
+    "skipLibCheck": true,                  // Skip checking of declaration files for better performance
+    "forceConsistentCasingInFileNames": true,  // Ensure case consistency in imports
+    "outDir": "./dist",                    // Output directory for compiled JS files
+    "rootDir": "./src",                    // Root directory for the TypeScript source files             // Allow importing of JSON modules
+    "baseUrl": "./",                       // The base directory for relative paths
+    "paths": {
+      "*": ["node_modules/*"]},
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,5 +25,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "vite.config.js"]
+  "include": ["src", "vite.config.js", "src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }

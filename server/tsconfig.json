@@ -1,16 +1,25 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "allowJs": true,
-    "noImplicitAny": false,
-    "outDir": "dist",             
-    "rootDir": "src",             
-    "noEmitOnError": true,
-    "typeRoots": ["./types", "./node_modules/@types"]        
+    "target": "ES2020",                   // Set the ECMAScript version for the output (use ES2020 for modern Node.js)
+    "module": "ESNext",                    // Use ES modules in output
+    "moduleResolution": "Node",            // Resolve modules in a Node.js style
+    "esModuleInterop": true,               // Enable compatibility with CommonJS modules
+    "skipLibCheck": true,                  // Skip checking of declaration files for better performance
+    "forceConsistentCasingInFileNames": true,  // Ensure case consistency in imports
+    "outDir": "./dist",                    // Output directory for compiled JS files
+    "rootDir": "./src",                    // Root directory for the TypeScript source files
+    "strict": true,                        // Enable strict type-checking
+    "resolveJsonModule": true,             // Allow importing of JSON modules
+    "baseUrl": "./",                       // The base directory for relative paths
+    "paths": {
+      "*": ["node_modules/*"]              // Ensure Node modules are found
+    }
   },
-  "include": ["src"],
-      
+  "include": [
+    "src/**/*.ts"                          // Include all TypeScript files in the `src` folder
+  ],
+  "exclude": [
+    "node_modules",                        // Exclude the `node_modules` folder
+    "dist"                                 // Exclude the `dist` folder (output folder)
+  ]
 }
