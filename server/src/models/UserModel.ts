@@ -1,5 +1,4 @@
 import { DataTypes, Model, Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
 import sequelize from './database';
 
 // Define attributes for User
@@ -27,15 +26,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public name!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
-
-  // Hash password before saving
-  async setPassword(password: string) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
-  }
 }
 
-// Initialize Model
+// Initialize Model without hooks
 User.init(
   {
     id: {
@@ -61,16 +54,12 @@ User.init(
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-  },
-  
-    tableName: 'Users',
-    sequelize,
-    hooks: {
-      beforeCreate: async (user: User) => await user.setPassword(user.password),
-      beforeUpdate: async (user: User) => {
-        if (user.changed('password')) await user.setPassword(user.password);
-      },
     },
+  },
+  {
+    sequelize,
+    tableName: 'Users',
+    timestamps: true,
   }
 );
 
